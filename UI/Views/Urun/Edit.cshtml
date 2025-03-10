@@ -1,0 +1,125 @@
+﻿@model Entities.Abstract.Urun
+
+@{
+    ViewBag.Title = "Ürün Düzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Ürün Düzenle</h2>
+
+@using (Html.BeginForm("Edit", "Urun", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UrunAdi)
+        @Html.TextBoxFor(model => model.UrunAdi, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Fiyat)
+        @Html.TextBoxFor(model => model.Fiyat, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StokAdedi)
+        @Html.TextBoxFor(model => model.StokAdedi, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.UrunAciklamasi)
+        @Html.TextBoxFor(model => model.UrunAciklamasi, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TedarikciId, "Tedarikçi Seç")
+        @Html.DropDownListFor(model => model.TedarikciId,
+            new SelectList(ViewBag.TedarikciListesi, "Value", "Text", Model.TedarikciId),
+            "--Tedarikçi Seçin--", new { @class = "form-control" })
+    </div>
+
+    <input type="hidden" name="UrunId" value="@Model.UrunId" />
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    @Html.ActionLink("İptal", "Index", null, new { @class = "btn btn-secondary" })
+}
+
+
+<style>
+    .form-horizontal {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h4 {
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .control-label {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+        transition: 0.3s ease-in-out;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+        .form-group label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+    .form-control::placeholder {
+        color: #6c757d;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .mt-4 {
+        margin-top: 1.5rem;
+    }
+
+    .col-md-6 {
+        margin-bottom: 10px;
+    }
+</style>

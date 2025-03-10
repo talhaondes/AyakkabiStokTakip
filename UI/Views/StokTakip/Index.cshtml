@@ -1,0 +1,126 @@
+﻿@model IEnumerable<UI.Models.GonderilenUrunler>
+@{
+    ViewBag.Title = "Ürün Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ürün Adı</th>
+            <th>Mağaza Adı</th>
+            <th>Gönderilen Tarih</th>
+            <th>Gönderilen Adet</th>
+            <th>Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UrunAdi</td>
+                <td>@item.MagazaAdi</td>
+                <td>@item.gonderilentarih.ToString("dd/MM/yyyy")</td>
+                <td>@item.gonderilenadet</td>
+                <td>@item.durumu</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+<style>
+    .form-horizontal {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    h4 {
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .control-label {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+        transition: 0.3s ease-in-out;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+    .btn-default {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+    }
+
+        .btn-default:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+    .text-danger {
+        font-size: 14px;
+        font-weight: bold;
+        color: #dc3545;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-bordered th, .table-bordered td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .table thead {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    a {
+        color: #007bff;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>

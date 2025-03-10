@@ -1,0 +1,157 @@
+﻿@model Entities.Abstract.Urun
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-horizontal">
+    <h4>Ürün Ekle</h4>
+    <hr />
+
+    <!-- Hata mesajını göster -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UrunAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UrunAdi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UrunAdi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fiyat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fiyat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fiyat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StokAdedi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StokAdedi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StokAdedi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UrunAciklamasi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UrunAciklamasi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UrunAciklamasi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kategori, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.KategoriId, new SelectList(ViewBag.kategoriList, "Value", "Text"), "Kategori Seçin", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.KategoriId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="TedarikciId" class="control-label col-md-2">Tedarikçi:</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.TedarikciId, new SelectList(ViewBag.TedarikciList, "Value", "Text"), "Tedarikçi Seçin", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TedarikciId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ekle" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Geri Dön", "Index")
+</div>
+
+
+<style>
+    .form-horizontal {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h4 {
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .control-label {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+        transition: 0.3s ease-in-out;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+    .btn-default {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+    }
+
+        .btn-default:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+    .text-danger {
+        font-size: 14px;
+        font-weight: bold;
+        color: #dc3545;
+        margin-top: 5px;
+    }
+
+    a {
+        color: #007bff;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group .col-md-10 {
+            margin-top: 5px;
+        }
+</style>
+

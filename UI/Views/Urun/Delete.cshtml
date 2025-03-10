@@ -1,0 +1,32 @@
+﻿@model Entities.Abstract.Urun
+
+@{
+    ViewBag.Title = "Ürün Silme";
+}
+
+<h3>Silmek İstediğinize Emin Misiniz?</h3>
+
+<div>
+    <h4>Ürün: @Model.UrunAdi</h4>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>Fiyat:</dt>
+        <dd>@Model.Fiyat</dd>
+
+        <dt>Stok Adedi:</dt>
+        <dd>@Model.StokAdedi</dd>
+
+        <dt>Açıklama:</dt>
+        <dd>@Model.UrunAciklamasi</dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Urun", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.UrunId)
+
+        <button type="submit" class="btn btn-danger">Sil</button>
+        @Html.ActionLink("İptal", "Index", null, new { @class = "btn btn-secondary" })
+    }
+</div>

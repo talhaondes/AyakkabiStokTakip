@@ -1,0 +1,159 @@
+﻿@model List<UI.Models.UrunlerTanim>
+
+@{
+    ViewBag.Title = "Ürün Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ürün Listesi</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p class="alert alert-warning">Henüz ürün eklenmemiş.</p>
+}
+else
+{
+    <form method="post">
+        <div class="form-group">
+            <label for="selectedTedarikciId">Tedarikçi Seçin:</label>
+            @Html.DropDownList("selectedTedarikciId", (IEnumerable<SelectListItem>)ViewBag.TedarikciList, "Tedarikçi Seçin", new { @class = "form-control", @selected = ViewBag.selectedTedarikciId })
+            <br />
+            <button type="submit" class="btn btn-primary">Filtrele</button>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Fiyat</th>
+                <th>Stok Adedi</th>
+                <th>Açıklama</th>
+                <th>Tedarikçi</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var urun in Model)
+            {
+                <tr>
+                    <td>@urun.UrunAdi</td>
+                    <td>@string.Format("{0:N2} ₺", urun.Fiyat)</td>
+                    <td>
+                        @if (urun.StokAdedi <= 0)
+                        {
+                            <span class="text-danger"><strong>Tükendi</strong></span>
+                        }
+                        else
+                        {
+                            @urun.StokAdedi
+                        }
+                    </td>
+                    <td>@urun.UrunAciklamasi</td>
+                    <td>@urun.TedarikciAd</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Urun", new { id = urun.UrunId })" class="btn btn-primary">Düzenle</a>
+                        <a href="@Url.Action("Delete", "Urun", new { id = urun.UrunId })" class="btn btn-sm btn-danger">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+<div>
+    <a href="/Urun/Add" class="btn btn-primary">Ürün Ekle</a>
+</div>
+
+<style>
+    .form-horizontal {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    h4 {
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .control-label {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+        transition: 0.3s ease-in-out;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+    .btn-default {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+    }
+
+        .btn-default:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+    .text-danger {
+        font-size: 14px;
+        font-weight: bold;
+        color: #dc3545;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-bordered th, .table-bordered td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .table thead {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    a {
+        color: #007bff;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
